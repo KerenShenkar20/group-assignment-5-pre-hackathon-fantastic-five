@@ -3,15 +3,18 @@ const app = express();
 const port = process.env.PORT || 8080;
 const {userRouter}= require("./router");
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.set('Content-Type', 'application/json');
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+// Server static assets 
+app.all('*', function(req, res, next) {
+    if (!req.get('Origin')) return next();
+    res.set('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.set('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,x-auth-token,x-api-key');
     next();
 });
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 app.use('/api/users',userRouter);
 
 
