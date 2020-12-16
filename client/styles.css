@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header, main, footer, nav, aside, section, div  {
+    display: block;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#wrapper h1, 
+#wrapper h2 {
+    text-align: center;
+}
+
+#content {
+    display: flex;
+}
+
+#restaurants-list,
+#restaurant-operations {
+    width: 50%;
+}
+
+#restaurant-operations > #buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+#restaurant-operations button {
+    width: 80px;
+}
+
+#get-delete-restaurant,
+#add-update-restaurant {
+    width: 270px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+#get-delete-restaurant, 
+#add-update-restaurant {
+    display: none;
+}
+
+#wrapper p{
+    color: crimson;
+    display: grid;
+}
+
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
+}

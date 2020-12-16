@@ -2,17 +2,31 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-        <script src="js/hackathon.js"></script>
+        <script src="users.js"></script>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
                 integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="styles.css"/>
 
         <title>Client side</title>
     </head>
     <body>
         <div id="wrapper">
-            
+
+            <section id="content">
+                <section id="restaurants-list">
+                    <h2>Users list</h2>
+                </section>
+                <section id="restaurant-operations">
+                    <h2>Users operations</h2>
+                    <section id="buttons">
+                        <button type="button" class="btn btn-info" id="get-button">Get</button>
+                        <button type="button" class="btn btn-danger" id="delete-button">Delete</button>
+                        <button type="button" class="btn btn-success" id="add-button">Add</button>
+                        <button type="button" class="btn btn-warning" id="update-button">Update</button>
+                    </section>
+                </section>
+            </section>
         </div>
     </body>
 </html>
