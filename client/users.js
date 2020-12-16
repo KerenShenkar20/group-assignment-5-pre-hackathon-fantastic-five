@@ -1,6 +1,5 @@
 $(function () {
     getAllRestaurants();
-    restaurantOperationsListeners();
 });
 
 function getAllRestaurants() {
@@ -36,20 +35,21 @@ function showRestaurant(rest) {
 }
 
 function recreateRestaurantsTable(rests) {
-    $("table").empty().remove();
+    // $("table").empty().remove();
     // $("#restaurant-result").empty().remove();
+    console.log(rests);
     rests.map(item => {
-        // console.log(rests);
-        // if(item)
+        if(item){
         //     item.location[0].lng = 0;
-        // console.log(item.location[0]);
-
+        //     console.log(item.location[0]);
+        // }
         $("#restaurants-list").append(
             '<p>' +
-            'Firsr Name: ' + rest.first_name + '<br>' +
-            'Last Name: ' + rest.last_name + '<br>' +
+            'Firsr Name: ' + item.first_name + '<br>' +
+            'Last Name: ' + item.last_name + '<br>' +
             '<p>'
         );
+        }
     })
 
 }
@@ -75,9 +75,4 @@ function restaurantOperationsListeners() {
         $("#get-delete-restaurant").css("display", "none");
         alert("Update");
     });
-
-    $("#get-delete-do").click(() => {
-        recreateRestaurantsTable();
-    }
-    );
 }
