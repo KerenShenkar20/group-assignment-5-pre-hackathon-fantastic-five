@@ -33,9 +33,37 @@ function filterUser(query) {
         url: `http://localhost:8080/api/users/filter/${query}`,
         type: 'GET',
         success: function (rest) {
-            showRestaurant(rest);
+            recreateRestaurantsTable(rests);
         }
     });
+}
+
+function filterUsers() {
+    str = '?';
+    if ($("#job").val())
+        str+= 'job='+$("#job").val() +'&'
+    if ($("#email").val())
+        str+= 'email='+$("#email").val()+'&'
+    if ($("#gender").val())
+        str+= 'gender='+$("#gender").val()+'&'
+    console.log(str);
+    filterUser(str);
+}
+
+function filterForm() {
+    $("#get-delete-restaurant").hide();
+
+    $("#test").append(
+        `
+        <label for="job">job</label><br>
+        <input type="text" id="job" name="job"><br>
+        <label for="email">email:</label><br>
+        <input type="text" id="email" name="email">
+        <label for="gender">gender:</label><br>
+        <input type="text" id="gender" name="gender">
+        <button id="submit" type="submit">Send!</button>
+    `
+    );
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -70,10 +98,12 @@ function recreateRestaurantsTable(rests) {
 
         $("#restaurants-list").append(
             '<p>' +
-            'Name: ' + item.first_name + '<br>' +
-            'Longitude: ' + item.last_name + '<br>' +
+            'First Name: ' + item.first_name + '<br>' +
+            'Last Name: ' + item.last_name + '<br>' +            
             'Geneder: ' + item.gender + '<br>' +
             'Email: ' + item.email + '<br>' +
+            'Color: ' + item.color + '<br>' +
+            'Job: ' + item.job + '<br>' +
             '<p>'
         );
     })
@@ -180,8 +210,12 @@ function restaurantOperationsListeners() {
             });
         }
         else if ($("#get-delete-do").text() === "Filter") {
-            const UserId = $("#rest-id").val();
-            deleteRestaurantById(`?${UserId}`);
+            filterForm();
+            $("#submit").click(() => {
+                filterUsers()
+                resetView();
+                // addView();
+            });
         }
     }
     );
