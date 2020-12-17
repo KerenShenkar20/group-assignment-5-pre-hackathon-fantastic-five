@@ -1,6 +1,6 @@
 $(function () {
     getAllRestaurants();
-    restaurantOperationsListeners();
+    usersOperationsListeners();
 });
 
 function getAllRestaurants() {
@@ -72,17 +72,26 @@ function filterForm() {
 
 function showRestaurant(rest) {
     $("#restaurant-result").empty();
+    if(rest){
+        $("#restaurant-result").append(
+            '<p>' +
+            'First Name: ' + rest.first_name + '<br>' +
+            'Last Name: ' + rest.last_name + '<br>' +
+            'Geneder: ' + rest.gender + '<br>' +
+            'Email: ' + rest.email + '<br>' +
+            'Color: ' + rest.color + '<br>' +
+            'Job: ' + rest.job + '<br>' +
+            '<p>'
+        )}
+        else{
+            $("#restaurant-result").append(
+                '<p>' + 
+                'User Does Not Exist' +
+                '<p>'
+            )}
 
-    $("#restaurant-result").append(
-        '<p>' +
-        'First Name: ' + rest.first_name + '<br>' +
-        'Last Name: ' + rest.last_name + '<br>' +
-        'Geneder: ' + rest.gender + '<br>' +
-        'Email: ' + rest.email + '<br>' +
-        'Color: ' + rest.color + '<br>' +
-        'Job: ' + rest.job + '<br>' +
-        '<p>'
-    );
+    
+    ;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +104,9 @@ function recreateRestaurantsTable(rests) {
     rests.map(item => {
 
         $("#restaurants-list").append(
-            '<div class="new-user" style="color:' + item.color + '">' +
+            
+            '<div class="new-user" style="color:' + item.color + ';display:block' + '">' +
+            '<img src="' + item.avatar + '" style="position:absolute;margin-left:300px;margin-top:50px">' +
             '<p>' +
             'First Name: ' + item.first_name + '<br>' +
             'Last Name: ' + item.last_name + '<br>' +
@@ -103,11 +114,8 @@ function recreateRestaurantsTable(rests) {
             'Email: ' + item.email + '<br>' +
             'Color: ' + item.color + '<br>' +
             'Job: ' + item.job + '<br>' +
-            '<img src="' + item.avatar + '">' +
             '<p></div>'
         );
-        // $(".new-user").css("background-image", item.avatar)
-        // $("#restaurants-list").css("color", item.color);
     })
 
 }
@@ -171,7 +179,7 @@ function resetView() {
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-function restaurantOperationsListeners() {
+function usersOperationsListeners() {
     $("#get-button").click(() => {
         resetView();
 

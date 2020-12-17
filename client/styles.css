@@ -22,16 +22,16 @@ body {
 
 
 #restaurants-list,
-#restaurant-operations {
+#users-operations {
     width: 50%;
 }
 
-#restaurant-operations > #buttons {
+#users-operations > #buttons {
     display: flex;
     justify-content: space-around;
 }
 
-#restaurant-operations button {
+#users-operations button {
     width: 80px;
 }
 
