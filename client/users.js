@@ -28,13 +28,30 @@ function getRestaurantById(userId) {
 
 /////////////////////////////////////////////////////////////////////////////////////
 
+function filterUser(query) {
+    $.ajax({
+        url: `http://localhost:8080/api/users/filter/${query}`,
+        type: 'GET',
+        success: function (rest) {
+            showRestaurant(rest);
+        }
+    });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+
 function showRestaurant(rest) {
     $("#restaurant-result").empty();
 
     $("#restaurant-result").append(
         '<p>' +
-        'Name: ' + rest.first_name + '<br>' +
-        'Longitude: ' + rest.last_name + '<br>' +
+        'First Name: ' + rest.first_name + '<br>' +
+        'Last Name: ' + rest.last_name + '<br>' +            
+        'Geneder: ' + rest.gender + '<br>' +
+        'Email: ' + rest.email + '<br>' +
+        'Color: ' + rest.color + '<br>' +
+        'Job: ' + rest.job + '<br>' +
+
         '<p>'
     );
 }
@@ -55,6 +72,8 @@ function recreateRestaurantsTable(rests) {
             '<p>' +
             'Name: ' + item.first_name + '<br>' +
             'Longitude: ' + item.last_name + '<br>' +
+            'Geneder: ' + item.gender + '<br>' +
+            'Email: ' + item.email + '<br>' +
             '<p>'
         );
     })
@@ -73,6 +92,7 @@ function deleteRestaurantById(userId) {
         }
     });
 }
+
 /////////////////////////////////////////////////////////////////////////////////////
 
 function updateUserById(userId, obj) {
@@ -115,15 +135,6 @@ function updateForm() {
 function resetView() {
     $("#test").empty();
 }
-// function addView()
-// {
-//     $("#get-delete-restaurant").append(
-
-//         `<input type="text" id="rest-id" name="rest-id"/>
-//         <button type="button" class="btn btn-primary" id="get-delete-do"></button>
-//         <section id="restaurant-result"></section>`)
-//     $("#get-delete-restaurant").css("display", "none");
-// }
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +152,8 @@ function restaurantOperationsListeners() {
     });
 
     $("#add-button").click(() => {
-        $("#get-delete-restaurant").css("display", "none");
+        $("#get-delete-restaurant").css("display", "block");
+        $("#get-delete-do").text("Filter");
     });
 
     $("#update-button").click(() => {
@@ -166,6 +178,10 @@ function restaurantOperationsListeners() {
                 resetView();
                 // addView();
             });
+        }
+        else if ($("#get-delete-do").text() === "Filter") {
+            const UserId = $("#rest-id").val();
+            deleteRestaurantById(`?${UserId}`);
         }
     }
     );
