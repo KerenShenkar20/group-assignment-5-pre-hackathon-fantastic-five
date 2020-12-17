@@ -20,6 +20,7 @@ body {
     display: flex;
 }
 
+
 #restaurants-list,
 #restaurant-operations {
     width: 50%;

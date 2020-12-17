@@ -29,11 +29,13 @@ function getRestaurantById(userId) {
 /////////////////////////////////////////////////////////////////////////////////////
 
 function filterUser(query) {
+    console.log(query);
     $.ajax({
         url: `http://localhost:8080/api/users/filter/${query}`,
         type: 'GET',
         success: function (rest) {
-            recreateRestaurantsTable(rests);
+            $("#restaurant-list").empty();
+            recreateRestaurantsTable(rest);
         }
     });
 }
@@ -41,12 +43,12 @@ function filterUser(query) {
 function filterUsers() {
     str = '?';
     if ($("#job").val())
-        str+= 'job='+$("#job").val() +'&'
+        str += 'job=' + $("#job").val() + '&'
     if ($("#email").val())
-        str+= 'email='+$("#email").val()+'&'
+        str += 'email=' + $("#email").val() + '&'
     if ($("#gender").val())
-        str+= 'gender='+$("#gender").val()+'&'
-    console.log(str);
+        str += 'gender=' + $("#gender").val() + '&'
+    console.log(str);   
     filterUser(str);
 }
 
@@ -58,9 +60,9 @@ function filterForm() {
         <label for="job">job</label><br>
         <input type="text" id="job" name="job"><br>
         <label for="email">email:</label><br>
-        <input type="text" id="email" name="email">
+        <input type="text" id="email" name="email"><br>
         <label for="gender">gender:</label><br>
-        <input type="text" id="gender" name="gender">
+        <input type="text" id="gender" name="gender"><br><br>
         <button id="submit" type="submit">Send!</button>
     `
     );
@@ -74,12 +76,11 @@ function showRestaurant(rest) {
     $("#restaurant-result").append(
         '<p>' +
         'First Name: ' + rest.first_name + '<br>' +
-        'Last Name: ' + rest.last_name + '<br>' +            
+        'Last Name: ' + rest.last_name + '<br>' +
         'Geneder: ' + rest.gender + '<br>' +
         'Email: ' + rest.email + '<br>' +
         'Color: ' + rest.color + '<br>' +
         'Job: ' + rest.job + '<br>' +
-
         '<p>'
     );
 }
@@ -90,22 +91,23 @@ function recreateRestaurantsTable(rests) {
     $("table").empty().remove();
     // $("#restaurant-result").empty().remove();
     console.log(rests);
+    $("#restaurants-list").empty();
     rests.map(item => {
-        // console.log(rests);
-        // if(item)
-        //     item.location[0].lng = 0;
-        // console.log(item.location[0]);
 
         $("#restaurants-list").append(
+            '<div class="new-user" style="color:' + item.color + '">' +
             '<p>' +
             'First Name: ' + item.first_name + '<br>' +
-            'Last Name: ' + item.last_name + '<br>' +            
+            'Last Name: ' + item.last_name + '<br>' +
             'Geneder: ' + item.gender + '<br>' +
             'Email: ' + item.email + '<br>' +
             'Color: ' + item.color + '<br>' +
             'Job: ' + item.job + '<br>' +
-            '<p>'
+            '<img src="' + item.avatar + '">' +
+            '<p></div>'
         );
+        // $(".new-user").css("background-image", item.avatar)
+        // $("#restaurants-list").css("color", item.color);
     })
 
 }
@@ -171,27 +173,46 @@ function resetView() {
 
 function restaurantOperationsListeners() {
     $("#get-button").click(() => {
+        resetView();
+
         $("#get-delete-restaurant").css("display", "block");
+        $("#get-delete-do").css("display", "block");
         $("#get-delete-do").text("Get");
     });
 
     $("#delete-button").click(() => {
+        resetView();
+
         $("#get-delete-restaurant").css("display", "block");
+        $("#get-delete-do").css("display", "block");
         $("#get-delete-do").text("Delete");
 
     });
 
     $("#add-button").click(() => {
-        $("#get-delete-restaurant").css("display", "block");
-        $("#get-delete-do").text("Filter");
+        resetView();
+        // Deleting the button
+        $("#get-delete-restaurant").css("display", "none");
+        $("#get-delete-do").css("display", "none");
+
+        //Adding filter options
+        filterForm();
+        $("#submit").click(() => {
+            filterUsers()
+            resetView();
+        })
     });
 
     $("#update-button").click(() => {
+        resetView();
         $("#get-delete-restaurant").css("display", "block");
+        $("#get-delete-do").css("display", "block");
         $("#get-delete-do").text("Update");
     });
 
     $("#get-delete-do").click(() => {
+        resetView();
+        $("#get-delete-do").css("display", "block");
         if ($("#get-delete-do").text() === "Get") {
             const UserId = $("#rest-id").val();
             getRestaurantById(UserId);
