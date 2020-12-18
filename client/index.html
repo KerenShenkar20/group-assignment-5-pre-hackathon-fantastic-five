@@ -17,25 +17,26 @@
         <h1>Users</h1>
 
         <section id="content">
-            <section id="restaurants-list">
+            <section id="users-list">
                 <h2>Users list</h2>
+                <button type="button" class="btn btn-secondary" id="button-show-all">Show All</button>
             </section>
             <section id="users-operations">
                 <h2>User operations</h2>
-
                 <section id="buttons">
                     <button type="button" class="btn btn-info" id="get-button">Get</button>
                     <button type="button" class="btn btn-danger" id="delete-button">Delete</button>
-                    <button type="button" class="btn btn-success" id="add-button">Filter</button>
+                    <button type="button" class="btn btn-success" id="filter-button">Filter</button>
                     <button type="button" class="btn btn-warning" id="update-button">Update</button>
                 </section>
 
-                <section id="get-delete-restaurant">
-                    <input type="text" id="rest-id" name="rest-id" />
-                    <button type="button" class="btn btn-primary" id="get-delete-do"></button>
-                    <section id="restaurant-result"></section>
+                <section id="operations">
+                    <input type="text" id="input-operation" name="user-id" placeholder="Enter User ID ..."/>
+                    <button type="button" id="btn-do-operation" class="btn btn-primary" ></button>
+                    <div id="operation-result"></div>
                 </section>
-                <div id="test"></div>
+
+                <div id="filters"> </div>
 
             </section>
         </section>

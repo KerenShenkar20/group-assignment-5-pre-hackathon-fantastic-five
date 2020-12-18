@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+p{
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
 header, main, footer, nav, aside, section, div  {
     display: block;
 }
@@ -21,9 +26,11 @@ body {
 }
 
 
-#restaurants-list,
+#users-list,
 #users-operations {
     width: 50%;
+    display: block;
+    position: relative;
 }
 
 #users-operations > #buttons {
@@ -35,15 +42,36 @@ body {
     width: 80px;
 }
 
-#get-delete-restaurant,
-#add-update-restaurant {
+#operations,
+#operation-result {
     width: 270px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
 }
 
-#get-delete-restaurant, 
-#add-update-restaurant {
+#operations, 
+#operation-result {
     display: none;
 }
+
+input {
+    font-family: Helvetica, sans-serif !important;
+}
+
+#filters input {
+    float: right !important;
+}
+
+#filters{
+    margin-left: 32%;
+    width: 250px;
+}
+
+#button-show-all{
+    position: absolute;
+    width: 100px;
+    left: 50%;
+    margin: 0 0 0 -50px;
+}
+
