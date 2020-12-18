@@ -1,3 +1,4 @@
+
 $(function () {
     getAllUsers();
     usersOperationsListeners();
@@ -77,7 +78,7 @@ function showUsers(rest) {
 
 function showFeedback(userID, msg) {
     $("#operation-result").empty();
-    $("#operations").css("display","block");
+    $("#operations").css("display", "block");
     $("#operation-result").append(
         '<p>' +
         '<b>User ' + userID + ' ' + msg + ' Successfully !</b>' +
@@ -98,7 +99,7 @@ function recreateUsersTable(rests) {
 
         $("#users-list").append(
 
-            '<br>' + 
+            '<br>' +
             '<div class="new-user" style="color:' + item.color + ';' + 'margin-left:30px">' +
             '<img src="' + item.avatar + '" style="display:block;position:absolute; margin-top:30px">' +
             '<div class="user-details" style="margin-left:80px;">' +
@@ -109,7 +110,7 @@ function recreateUsersTable(rests) {
             'Email: ' + item.email + '<br>' +
             'Color: ' + item.color + '<br>' +
             'Job: ' + item.job + '<br>' +
-            '<p> </div>' + 
+            '<p> </div>' +
             '</div>'
         );
     })
@@ -169,7 +170,7 @@ function filterForm() {
 function updateForm() {
     $("#input-operation").hide();
     $("#btn-do-operation").hide();
-    
+
 
     $("#filters").append(
         `
@@ -190,19 +191,19 @@ function resetView() {
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-function showOperations(){
+function showOperations() {
     $("#operations").css("display", "block");
     $("#btn-do-operation").css("display", "block");
     $("#input-operation").css("display", "block");
 }
 
-function hideOperations(){
+function hideOperations() {
     $("#operations").hide();
     $("#btn-do-operation").hide();
     $("#input-operation").hide();
 }
 
-function showAllButton(){
+function showAllButton() {
 
 }
 
@@ -235,11 +236,17 @@ function usersOperationsListeners() {
         hideOperations();
         filterForm();
         $("#btn-submit").click(() => {
-                console.log("CHECK");
-                runFilters();
-                showAllButton()
-            });
+            console.log("CHECK");
+            runFilters();
+            showAllButton()
+        });
     });
+
+    //SHOW ALL
+    $("#show-all-button").click(() => {
+        getAllUsers();
+    });
+
 
     // BUTTONS HANDLER
     $("#btn-do-operation").click(() => {
@@ -261,13 +268,14 @@ function usersOperationsListeners() {
                 updatedUser(UserId);
             });
         }
+
         // else if ($("#btn-do-operation").text() === "Filter") {
         //     console.log("CHECK");
-            // $("#btn-submit").click(() => {
-            //     console.log("CHECK");
-            //     runFilters();
-            //     resetView();
-            // });
+        // $("#btn-submit").click(() => {
+        //     console.log("CHECK");
+        //     runFilters();
+        //     resetView();
+        // });
         // }
     });
 
